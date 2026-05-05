@@ -1,0 +1,121 @@
+{
+  "name": "Voicemail Transcriber — Royal Mile",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "truck-voicemail",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "vm-webhook-001",
+      "name": "Voicemail Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $json.body.recording_url + '.mp3' }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        },
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "genericCredentials": {
+          "user": "REPLACE_WITH_TWILIO_ACCOUNT_SID",
+          "password": "REPLACE_WITH_TWILIO_AUTH_TOKEN"
+        }
+      },
+      "id": "vm-download-002",
+      "name": "Download Recording",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/audio/transcriptions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "genericCredentials": {
+          "name": "Authorization",
+          "value": "Bearer REPLACE_WITH_OPENAI_API_KEY"
+        },
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "model",    "value": "whisper-1" },
+            { "name": "language", "value": "en" },
+            { "name": "file",     "parameterType": "formBinaryData", "inputDataFieldName": "data" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "vm-whisper-003",
+      "name": "Whisper Transcription",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "genericCredentials": {
+          "name": "Authorization",
+          "value": "Bearer REPLACE_WITH_OPENAI_API_KEY"
+        },
+        "contentType": "json",
+        "body": "={\n  \"model\": \"gpt-4o-mini\",\n  \"response_format\": { \"type\": \"json_object\" },\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a dispatcher for Royal Mile Tire and Repair, a roadside commercial truck repair service. Extract structured information from a voicemail transcription left by a trucker. Return ONLY valid JSON with these exact keys: trucker_name (string, use 'Caller' if not given), phone (string, use the caller_number if not stated), location (string, highway and mile marker or nearest town), maps_url (string, a Google Maps search URL for the location or empty string), services_needed (array of strings from this list: Tire Change, Tire Patch, Lights Repair, Electrical, Glad Hand, Air Hose, Other), urgency (string, one of: URGENT - Need help now, Within the hour, Can wait a bit), truck_info (string, any truck or trailer details mentioned), notes (string, anything else relevant). If a field is unclear leave it as an empty string or empty array.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Caller number: {{ $('Voicemail Webhook').item.json.body.caller }}\\n\\nVoicemail transcript: {{ $json.text }}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "vm-gpt-004",
+      "name": "GPT Extract Fields",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = JSON.parse($input.item.json.choices[0].message.content);\nconst now = new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', hour12: true });\nraw.submitted_at = now + ' (voicemail)';\nif (!raw.phone || raw.phone === '') {\n  raw.phone = $('Voicemail Webhook').item.json.body.caller;\n}\nif (!Array.isArray(raw.services_needed)) {\n  raw.services_needed = [raw.services_needed].filter(Boolean);\n}\nreturn { json: raw };"
+      },
+      "id": "vm-parse-005",
+      "name": "Build Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "REPLACE_WITH_YOUR_EXISTING_N8N_WEBHOOK_URL",
+        "contentType": "json",
+        "body": "={{ JSON.stringify({ body: $json }) }}",
+        "options": {}
+      },
+      "id": "vm-forward-006",
+      "name": "Trigger Existing Flow",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 300]
+    }
+  ],
+  "connections": {
+    "Voicemail Webhook":     { "main": [[{ "node": "Download Recording",   "type": "main", "index": 0 }]] },
+    "Download Recording":    { "main": [[{ "node": "Whisper Transcription", "type": "main", "index": 0 }]] },
+    "Whisper Transcription": { "main": [[{ "node": "GPT Extract Fields",    "type": "main", "index": 0 }]] },
+    "GPT Extract Fields":    { "main": [[{ "node": "Build Payload",         "type": "main", "index": 0 }]] },
+    "Build Payload":         { "main": [[{ "node": "Trigger Existing Flow", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" }
+}

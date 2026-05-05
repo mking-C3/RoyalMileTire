@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#0e0e0e">
+  <meta name="description" content="Royal Mile Tire &amp; Repair — mobile commercial truck repair and tire service along the I-35 &amp; I-70 corridors. Based in Hillsdale, KS. Weekend &amp; after-hours roadside service. We come to you.">
+  <link rel="canonical" href="https://royalmiletire.com/">
+  <meta property="og:title" content="Royal Mile Tire &amp; Repair — Roadside Truck Service">
+  <meta property="og:description" content="Mobile commercial truck repair and tire service for the I-70 corridor. We come to you.">
+  <meta property="og:url" content="https://royalmiletire.com/">
+  <meta property="og:type" content="website">
+
+  <title>Royal Mile Tire &amp; Repair — Roadside Truck Service</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       RESET & TOKENS (shared with request.html)
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #0e0e0e;
+      --surface:      #181818;
+      --surface-2:    #1f1f1f;
+      --border:       #2b2b2b;
+      --border-mid:   #3a3a3a;
+      --yellow:       #f5c200;
+      --yellow-dark:  #c09800;
+      --yellow-glow:  rgba(245, 194, 0, 0.12);
+      --text:         #f7f3e8;
+      --text-dim:     #d8d0c0;
+      --text-muted:   #ada494;
+      --urgent:       #ff4500;
+      --urgent-dark:  #c43300;
+      --warn:         #e8a000;
+    }
+
+    html { font-size: 16px; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Roboto Condensed', 'Arial Narrow', Arial, sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Caution stripe ── */
+    .caution-stripe {
+      height: 7px;
+      background: repeating-linear-gradient(
+        -52deg,
+        var(--yellow) 0,
+        var(--yellow) 12px,
+        var(--bg) 12px,
+        var(--bg) 24px
+      );
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--bg);
+      border-bottom: 2px solid var(--border);
+      padding: 14px 20px 12px;
+    }
+
+    .header-inner {
+      max-width: 620px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .header-text h1 {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: clamp(1.75rem, 7vw, 2.6rem);
+      letter-spacing: 0.04em;
+      color: var(--yellow);
+      line-height: 0.95;
+      text-transform: uppercase;
+    }
+
+    .header-sub {
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    .header-badge {
+      background: var(--yellow);
+      color: #0e0e0e;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      padding: 4px 8px 3px;
+      border-radius: 2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 36px 18px 32px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .hero-headline {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: clamp(2.4rem, 11vw, 3.6rem);
+      letter-spacing: 0.03em;
+      line-height: 0.95;
+      color: var(--text);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      color: var(--yellow);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--text-dim);
+      max-width: 380px;
+      margin: 0 auto 26px;
+      line-height: 1.55;
+    }
+
+    /* ── CTA Buttons ── */
+    .cta-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto 10px;
+      padding: 18px 22px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.13s, transform 0.1s, color 0.13s, border-color 0.13s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .cta-primary {
+      background: var(--yellow);
+      color: #0e0e0e;
+      box-shadow: 0 0 0 0 var(--yellow-glow);
+    }
+
+    .cta-primary:active {
+      background: var(--yellow-dark);
+      transform: scale(0.99);
+    }
+
+    @media (hover: hover) {
+      .cta-primary:hover { background: #ffd030; }
+    }
+
+    .cta-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1.5px solid var(--border-mid);
+      font-size: 1.2rem;
+    }
+
+    .cta-secondary:active {
+      background: var(--surface-2);
+      transform: scale(0.99);
+    }
+
+    @media (hover: hover) {
+      .cta-secondary:hover { border-color: var(--yellow); color: var(--yellow); }
+    }
+
+    /* ============================================================
+       SECTION SHARED
+    ============================================================ */
+    .section {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 26px 18px 22px;
+    }
+
+    .section.boxed {
+      background: var(--surface);
+      border-top: 2px solid var(--border);
+      border-bottom: 2px solid var(--border);
+      max-width: none;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .section.boxed > .section-inner {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    .section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.16em;
+      color: var(--yellow);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-lead {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      max-width: 420px;
+      margin: 0 auto 18px;
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       SERVICES GRID
+    ============================================================ */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 420px) {
+      .services-grid { grid-template-columns: 1fr; }
+    }
+
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--yellow);
+      border-radius: 0 3px 3px 0;
+      padding: 14px 14px 12px;
+    }
+
+    .service-card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      color: var(--yellow);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      line-height: 1.1;
+    }
+
+    .service-card-desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.45;
+    }
+
+    .services-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 14px;
+      letter-spacing: 0.04em;
+      font-style: italic;
+    }
+
+    /* ============================================================
+       INFO GRIDS (area / hours)
+    ============================================================ */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .info-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 14px 10px 12px;
+      text-align: center;
+    }
+
+    .info-card-label {
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .info-card-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      line-height: 1.15;
+    }
+
+    .info-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ============================================================
+       BOTTOM CTA
+    ============================================================ */
+    .cta-section {
+      padding: 38px 18px 40px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--surface) 0, #141414 100%);
+      border-top: 2px solid var(--border);
+      border-bottom: 2px solid var(--border);
+    }
+
+    .cta-section-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.7rem, 7vw, 2.2rem);
+      letter-spacing: 0.06em;
+      color: var(--yellow);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+
+    .cta-section-sub {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      margin-bottom: 22px;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      padding: 18px 20px 22px;
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .footer-payment {
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .footer-payment .pay-chip {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border-mid);
+      border-radius: 2px;
+      padding: 2px 8px;
+      margin: 0 2px 4px;
+      color: var(--text-dim);
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Caution stripe -->
+  <div class="caution-stripe"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <div class="header-text">
+        <h1>Royal Mile<br>Tire &amp; Repair</h1>
+        <p class="header-sub">Roadside truck service. We come to you.</p>
+      </div>
+      <span class="header-badge">Nights / Weekends</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">I-70 Corridor · Topeka · KC Metro</p>
+    <h1 class="hero-headline">Broken Down?<br><em>We Come to You.</em></h1>
+    <p class="hero-sub">Mobile commercial truck repair and tire service. Weekend and after-hours roadside coverage when other shops are closed.</p>
+
+    <a href="request.html" class="cta-button cta-primary">
+      Need Assistance &nbsp;→
+    </a>
+    <a href="tel:+18667692580" class="cta-button cta-secondary">
+      📞 &nbsp;Call 866-ROYAL-80
+    </a>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section">
+    <h2 class="section-heading">Services We Offer</h2>
+    <p class="section-lead">Send a request or call — describe what's wrong and where you are. We dispatch and come to you.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-card-name">Tire Plug &amp; Patch</div>
+        <p class="service-card-desc">Tread punctures repaired roadside — no tire swap needed.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card-name">Tire Replacement *</div>
+        <p class="service-card-desc">Steer, drive, and trailer tires replaced on site.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card-name">Air Pressure Check</div>
+        <p class="service-card-desc">All tires inspected and inflated to spec.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card-name">Glad Hand &amp; Air Lines</div>
+        <p class="service-card-desc">Air system fittings, hoses, and glad hands replaced. Parts included.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card-name">Lights &amp; DOT Bulbs</div>
+        <p class="service-card-desc">Headlights, markers, brake, tail, and turn signals replaced.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card-name">Electrical Repair</div>
+        <p class="service-card-desc">Trace faults, fix fuses, grounds, and connectors. Written estimates.</p>
+      </div>
+    </div>
+    <p class="services-note">* Tire replacement subject to availability — call to confirm</p>
+  </section>
+
+  <!-- SERVICE AREA -->
+  <section class="section boxed">
+    <div class="section-inner">
+      <h2 class="section-heading">Service Area</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card-label">Home Base</div>
+          <div class="info-card-value">Hillsdale, KS</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">Metro</div>
+          <div class="info-card-value">Kansas&nbsp;City</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">Corridors</div>
+          <div class="info-card-value">I-35 &amp; I-70</div>
+        </div>
+      </div>
+      <p class="info-note">Extended-area calls quoted before dispatch.</p>
+    </div>
+  </section>
+
+  <!-- HOURS -->
+  <section class="section">
+    <h2 class="section-heading">When We Operate</h2>
+    <p class="section-lead">Premium weekend operation — when other shops are closed.</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-label">Weekend Daytime</div>
+        <div class="info-card-value">8am – 5pm</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">After Hours</div>
+        <div class="info-card-value">5pm – 10pm</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Urgent Hours</div>
+        <div class="info-card-value">10pm – 8am</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="cta-section">
+    <h2 class="cta-section-headline">Need Help Right Now?</h2>
+    <p class="cta-section-sub">Tap below — fill out a few details and we'll call you back within minutes.</p>
+    <a href="request.html" class="cta-button cta-primary">
+      Need Assistance &nbsp;→
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-payment">
+      <span class="pay-chip">Cash</span>
+      <span class="pay-chip">Zelle</span>
+      <span class="pay-chip">Venmo</span>
+      <span class="pay-chip">Card</span>
+    </div>
+    <div class="footer-copy">
+      &copy; Royal Mile Tire &amp; Repair · royalmiletire.com
+    </div>
+  </footer>
+
+</body>
+</html>

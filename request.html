@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#0e0e0e">
+  <meta name="description" content="Royal Mile Tire &amp; Repair — roadside commercial truck and tire service. Tell us where you are and what you need. We come to you, 24/7.">
+  <title>Royal Mile Tire &amp; Repair — Request Service</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       RESET & CUSTOM PROPERTIES
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:             #0e0e0e;
+      --surface:        #181818;
+      --surface-2:      #1f1f1f;
+      --border:         #2b2b2b;
+      --border-mid:     #3a3a3a;
+      --yellow:         #f5c200;
+      --yellow-dark:    #c09800;
+      --yellow-glow:    rgba(245, 194, 0, 0.12);
+      --text:           #f7f3e8;
+      --text-dim:       #d8d0c0;
+      --text-muted:     #ada494;
+      --urgent:         #ff4500;
+      --urgent-dark:    #c43300;
+      --urgent-glow:    rgba(255, 69, 0, 0.18);
+      --warn:           #e8a000;
+      --warn-glow:      rgba(232, 160, 0, 0.15);
+      --error:          #ff3b3b;
+      --error-bg:       rgba(255, 59, 59, 0.07);
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Roboto Condensed', 'Arial Narrow', Arial, sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       CAUTION STRIPE
+    ============================================================ */
+    .caution-stripe {
+      height: 7px;
+      background: repeating-linear-gradient(
+        -52deg,
+        var(--yellow)     0,
+        var(--yellow)     12px,
+        var(--bg)         12px,
+        var(--bg)         24px
+      );
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       HEADER
+    ============================================================ */
+    header {
+      background: var(--bg);
+      border-bottom: 2px solid var(--border);
+      padding: 14px 20px 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 620px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .header-text h1 {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: clamp(1.75rem, 7vw, 2.6rem);
+      letter-spacing: 0.04em;
+      color: var(--yellow);
+      line-height: 0.95;
+      text-transform: uppercase;
+    }
+
+    .header-sub {
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    .header-badge {
+      background: var(--yellow);
+      color: #0e0e0e;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      padding: 4px 8px 3px;
+      border-radius: 2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+
+    /* ============================================================
+       MAIN LAYOUT
+    ============================================================ */
+    main {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 24px 16px 56px;
+    }
+
+    /* ============================================================
+       SECTION HEADERS
+    ============================================================ */
+    .section-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-label .req-dot {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      background: var(--yellow);
+      border-radius: 50%;
+      margin-bottom: 1px;
+    }
+
+    .form-section {
+      margin-bottom: 30px;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 28px;
+    }
+
+    /* ============================================================
+       FORM FIELDS — TEXT / TEL / TEXTAREA
+    ============================================================ */
+    .field {
+      margin-bottom: 16px;
+    }
+
+    label.field-label {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .req-star {
+      color: var(--yellow);
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      font-family: 'Roboto Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      padding: 13px 14px;
+      border-radius: 3px;
+      outline: none;
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+      -webkit-appearance: none;
+      appearance: none;
+      line-height: 1.4;
+    }
+
+    input[type="text"]::placeholder,
+    input[type="tel"]::placeholder,
+    textarea::placeholder {
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    input[type="text"]:focus,
+    input[type="tel"]:focus,
+    textarea:focus {
+      border-color: var(--yellow);
+      background: #131313;
+      box-shadow: 0 0 0 3px var(--yellow-glow);
+    }
+
+    input[type="tel"] {
+      font-size: 1.3rem;
+      letter-spacing: 0.06em;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    /* Error states */
+    .field.has-error input,
+    .field.has-error textarea {
+      border-color: var(--error);
+      background: var(--error-bg);
+    }
+
+    .field-error-msg {
+      display: none;
+      color: var(--error);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 5px;
+    }
+
+    .field.has-error .field-error-msg {
+      display: block;
+    }
+
+    /* ============================================================
+       SERVICE TOGGLE BUTTONS
+    ============================================================ */
+    .service-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+
+    .svc-toggle {
+      position: relative;
+    }
+
+    .svc-toggle input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    .svc-toggle label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 58px;
+      padding: 10px 10px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: border-color 0.12s, color 0.12s, background 0.12s;
+      user-select: none;
+      -webkit-user-select: none;
+      line-height: 1.25;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .svc-toggle input:checked + label {
+      background: var(--yellow-glow);
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    @media (hover: hover) {
+      .svc-toggle label:hover {
+        border-color: var(--border-mid);
+        color: var(--text-dim);
+      }
+      .svc-toggle input:checked + label:hover {
+        border-color: var(--yellow);
+      }
+    }
+
+    /* "Other" spans full width */
+    .svc-toggle.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .services-field.has-error .service-grid {
+      outline: 1.5px solid var(--error);
+      border-radius: 3px;
+    }
+
+    .services-error-msg {
+      display: none;
+      color: var(--error);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 7px;
+    }
+
+    .services-field.has-error .services-error-msg {
+      display: block;
+    }
+
+    /* ============================================================
+       URGENCY RADIO BUTTONS
+    ============================================================ */
+    .urgency-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .urg-option {
+      position: relative;
+    }
+
+    .urg-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    .urg-option label {
+      display: flex;
+      align-items: center;
+      min-height: 58px;
+      padding: 13px 16px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      transition: border-color 0.12s, color 0.12s, background 0.12s, box-shadow 0.12s;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      gap: 0;
+    }
+
+    .urg-dot {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border-mid);
+      border-radius: 50%;
+      margin-right: 14px;
+      flex-shrink: 0;
+      transition: border-color 0.12s, background 0.12s, box-shadow 0.12s;
+    }
+
+    /* Neutral: checked */
+    .urg-option.neutral input:checked + label {
+      border-color: var(--text-dim);
+      color: var(--text);
+      background: rgba(255,255,255,0.02);
+    }
+    .urg-option.neutral input:checked + label .urg-dot {
+      background: var(--text);
+      border-color: var(--text);
+      box-shadow: inset 0 0 0 4px var(--surface);
+    }
+
+    /* Moderate urgency: checked */
+    .urg-option.moderate input:checked + label {
+      border-color: var(--warn);
+      color: var(--warn);
+      background: var(--warn-glow);
+    }
+    .urg-option.moderate input:checked + label .urg-dot {
+      background: var(--warn);
+      border-color: var(--warn);
+      box-shadow: inset 0 0 0 4px var(--surface);
+    }
+
+    /* Urgent option — always visually heavier */
+    .urg-option.critical label {
+      border-color: #2e1a10;
+      font-size: 1.05rem;
+      letter-spacing: 0.07em;
+      background: #130a05;
+    }
+    .urg-option.critical label .urg-dot {
+      border-color: #5e2a10;
+    }
+    .urg-option.critical input:checked + label {
+      border-color: var(--urgent);
+      color: var(--urgent);
+      background: var(--urgent-glow);
+      box-shadow: 0 0 0 3px var(--urgent-glow);
+    }
+    .urg-option.critical input:checked + label .urg-dot {
+      background: var(--urgent);
+      border-color: var(--urgent);
+      box-shadow: inset 0 0 0 4px #130a05;
+    }
+
+    @media (hover: hover) {
+      .urg-option.neutral label:hover   { border-color: var(--border-mid); color: var(--text); }
+      .urg-option.moderate label:hover  { border-color: var(--warn); color: var(--warn); background: var(--warn-glow); }
+      .urg-option.critical label:hover  { border-color: var(--urgent); color: var(--urgent); background: var(--urgent-glow); }
+    }
+
+    .urgency-field.has-error .urgency-stack {
+      outline: 1.5px solid var(--error);
+      border-radius: 3px;
+    }
+
+    .urgency-error-msg {
+      display: none;
+      color: var(--error);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 7px;
+    }
+
+    .urgency-field.has-error .urgency-error-msg {
+      display: block;
+    }
+
+    /* ============================================================
+       SUBMIT BUTTON
+    ============================================================ */
+    .submit-wrap {
+      padding-top: 4px;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      background: var(--yellow);
+      color: #0e0e0e;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: none;
+      padding: 20px 24px 18px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.13s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+    }
+
+    .submit-btn:active {
+      background: var(--yellow-dark);
+      transform: scale(0.99);
+    }
+
+    @media (hover: hover) {
+      .submit-btn:hover {
+        background: #ffd030;
+      }
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .submit-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--yellow-glow), 0 0 0 5px var(--yellow);
+    }
+
+    /* ============================================================
+       CONFIRMATION SCREEN
+    ============================================================ */
+    #confirmation {
+      display: none;
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 52px 24px 72px;
+      text-align: center;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    #confirmation.visible {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .confirm-check {
+      width: 72px;
+      height: 72px;
+      background: var(--yellow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+    }
+
+    .confirm-check svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .confirm-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 0.06em;
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .confirm-msg {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+
+    .confirm-msg strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .confirm-phone-block {
+      display: inline-block;
+      background: var(--surface);
+      border: 1.5px solid var(--border-mid);
+      border-radius: 3px;
+      padding: 14px 28px 12px;
+      margin-bottom: 32px;
+    }
+
+    .confirm-phone-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .confirm-phone-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.1em;
+      color: var(--text);
+    }
+
+    .confirm-safety {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .confirm-safety::before {
+      content: '⚠ ';
+      color: var(--warn);
+    }
+
+    /* hide form when confirmed */
+    #form-wrapper.hidden {
+      display: none;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 14px 20px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       PRICING SECTION
+    ============================================================ */
+    .pricing-section {
+      background: #111111;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .pricing-inner {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 16px 16px 20px;
+    }
+
+    .pricing-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-heading h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.16em;
+      color: var(--yellow);
+      text-transform: uppercase;
+    }
+
+    .pricing-heading .pricing-region {
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Tier cards */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      margin-bottom: 8px;
+    }
+
+    .tier-card {
+      padding: 9px 7px 8px;
+      border: 1.5px solid var(--border);
+      border-radius: 2px;
+      background: var(--surface);
+      text-align: center;
+      position: relative;
+    }
+
+    .tier-card.active-tier::after {
+      content: 'NOW';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      padding: 1px 5px;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .tier-card:not(.active-tier) {
+      opacity: 0.45;
+    }
+
+    .tier-day.active-tier  { border-color: var(--text-dim); background: #1e1e1e; }
+    .tier-day.active-tier::after { background: var(--text-dim); color: var(--bg); }
+
+    .tier-after.active-tier { border-color: var(--warn); background: #1a1200; }
+    .tier-after.active-tier::after { background: var(--warn); color: #000; }
+
+    .tier-urgent.active-tier { border-color: var(--urgent); background: #180700; }
+    .tier-urgent.active-tier::after { background: var(--urgent); color: #fff; }
+
+    .t-time {
+      font-size: 0.58rem;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+      margin-bottom: 3px;
+      line-height: 1.3;
+    }
+
+    .t-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .tier-day    .t-name { color: var(--text-dim); }
+    .tier-after  .t-name { color: var(--warn); }
+    .tier-urgent .t-name { color: var(--urgent); }
+
+    .t-trip {
+      font-size: 0.74rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .tier-day    .t-trip { color: var(--text); }
+    .tier-after  .t-trip { color: var(--warn); }
+    .tier-urgent .t-trip { color: var(--urgent); }
+
+    .t-mult {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+    }
+
+    .tier-note {
+      font-size: 0.66rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 14px;
+    }
+
+    /* Service price table */
+    .price-table-wrap {
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+    }
+
+    .price-table thead th {
+      background: #0a0a0a;
+      padding: 7px 9px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      text-align: left;
+      border-bottom: 1px solid var(--border-mid);
+      white-space: nowrap;
+    }
+
+    .price-table thead th:not(:first-child) { text-align: right; }
+
+    .price-table tbody td {
+      padding: 7px 9px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-dim);
+      vertical-align: top;
+      line-height: 1.35;
+    }
+
+    .price-table tbody td:not(:first-child) {
+      text-align: right;
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .price-table tbody tr:last-child td { border-bottom: none; }
+
+    .price-table .section-row td {
+      background: #0c0c0c;
+      color: var(--text-muted);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 9px;
+    }
+
+    .price-table .phase2-row td { opacity: 0.65; }
+
+    .phase-badge {
+      display: inline-block;
+      font-size: 0.55rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--border-mid);
+      color: var(--text-muted);
+      padding: 1px 4px 0;
+      border-radius: 2px;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+
+    .price-note {
+      font-size: 0.66rem;
+      color: var(--text-muted);
+      font-style: italic;
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* Estimate callout */
+    .estimate-callout {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--yellow);
+      border-radius: 0 3px 3px 0;
+      padding: 10px 13px;
+      margin-bottom: 11px;
+      font-size: 0.76rem;
+    }
+
+    .estimate-callout-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.74rem;
+      letter-spacing: 0.14em;
+      color: var(--yellow);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .est-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      color: var(--text-dim);
+      padding: 2px 0;
+    }
+
+    .est-row strong { color: var(--text); font-weight: 700; }
+
+    .est-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 6px 0 5px;
+    }
+
+    .est-totals {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .est-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    .est-total-row.day    { color: var(--text); }
+    .est-total-row.after  { color: var(--warn); }
+    .est-total-row.urgent { color: var(--urgent); }
+
+    /* Payment */
+    .payment-strip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding: 8px 11px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      margin-bottom: 10px;
+      font-size: 0.72rem;
+    }
+
+    .pay-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      margin-right: 2px;
+    }
+
+    .pay-chip {
+      background: var(--surface);
+      border: 1px solid var(--border-mid);
+      border-radius: 2px;
+      padding: 2px 7px;
+      color: var(--text-dim);
+      font-size: 0.7rem;
+      letter-spacing: 0.03em;
+    }
+
+    .pricing-fine-print {
+      font-size: 0.64rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+    }
+
+    /* ============================================================
+       SERVICE DETAIL PANELS
+    ============================================================ */
+    .detail-panel {
+      display: none;
+      margin-top: 12px;
+      padding: 14px 14px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--yellow);
+      border-radius: 0 3px 3px 0;
+    }
+
+    .detail-panel.visible {
+      display: block;
+    }
+
+    .detail-panel-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      color: var(--yellow);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .detail-field {
+      margin-bottom: 12px;
+    }
+
+    .detail-field:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-label {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .detail-toggles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .detail-toggle {
+      position: relative;
+    }
+
+    .detail-toggle input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    .detail-toggle label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 13px;
+      min-height: 38px;
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: border-color 0.12s, color 0.12s, background 0.12s;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
+    }
+
+    .detail-toggle input:checked + label {
+      background: var(--yellow-glow);
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    @media (hover: hover) {
+      .detail-toggle label:hover { border-color: var(--border-mid); color: var(--text-dim); }
+      .detail-toggle input:checked + label:hover { border-color: var(--yellow); }
+    }
+
+    /* ============================================================
+       LOCATE BUTTON & MAPS TAG
+    ============================================================ */
+    .locate-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: var(--surface-2);
+      border: 1.5px solid var(--border-mid);
+      color: var(--text-dim);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 11px 16px;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: border-color 0.12s, color 0.12s, background 0.12s;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+    }
+
+    @media (hover: hover) {
+      .locate-btn:hover {
+        border-color: var(--yellow);
+        color: var(--yellow);
+        background: var(--yellow-glow);
+      }
+    }
+
+    .locate-btn:active {
+      background: var(--yellow-glow);
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    .locate-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .locate-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--yellow-glow);
+    }
+
+    .maps-tag {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      padding: 9px 12px;
+      background: var(--yellow-glow);
+      border: 1px solid var(--yellow-dark);
+      border-radius: 3px;
+    }
+
+    .maps-tag.visible {
+      display: flex;
+    }
+
+    .maps-tag-coords {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .maps-tag-link {
+      color: var(--yellow);
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    @media (hover: hover) {
+      .maps-tag-link:hover { text-decoration: underline; }
+    }
+
+    /* ============================================================
+       RESPONSIVE — small phones
+    ============================================================ */
+    @media (max-width: 380px) {
+      .header-text h1 { font-size: 1.6rem; }
+      .service-grid   { grid-template-columns: 1fr; }
+      .svc-toggle.full-width { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── CAUTION STRIPE ── -->
+  <div class="caution-stripe"></div>
+
+  <!-- ── HEADER ── -->
+  <header>
+    <div class="header-inner">
+      <div class="header-text">
+        <h1>Royal Mile<br>Tire &amp; Repair</h1>
+        <p class="header-sub">Tell us what you need. We will come to you.</p>
+      </div>
+      <span class="header-badge">Nights / Weekends</span>
+    </div>
+  </header>
+
+  <a href="index.html" style="display:block;background:var(--bg);padding:9px 16px;border-bottom:1px solid var(--border);font-family:'Bebas Neue',sans-serif;font-size:0.78rem;letter-spacing:0.14em;color:var(--text-dim);text-transform:uppercase;text-decoration:none;text-align:center;">← Back to Home</a>
+
+  <!-- ── PRICING ── -->
+  <section class="pricing-section">
+    <div class="pricing-inner">
+
+      <div class="pricing-heading">
+        <h2>Service Rates</h2>
+        <span class="pricing-region">KS / MO Corridor</span>
+      </div>
+
+      <!-- Time tiers -->
+      <div class="tier-grid">
+        <div class="tier-card tier-day" id="tier-day">
+          <div class="t-time">8am – 5pm</div>
+          <div class="t-name">Weekend<br>Daytime</div>
+          <div class="t-trip">$150/hr trip</div>
+          <div class="t-mult">Base rate</div>
+        </div>
+        <div class="tier-card tier-after" id="tier-after">
+          <div class="t-time">5pm – 9:59pm</div>
+          <div class="t-name">After Hours</div>
+          <div class="t-trip">$225/hr trip</div>
+          <div class="t-mult">1.4× rate</div>
+        </div>
+        <div class="tier-card tier-urgent" id="tier-urgent">
+          <div class="t-time">10pm – 8am</div>
+          <div class="t-name">Urgent Hours</div>
+          <div class="t-trip">$300/hr trip</div>
+          <div class="t-mult">2.0× rate</div>
+        </div>
+      </div>
+      <p class="tier-note">Tier set by dispatch time. Trip charge billed both ways — 1 hr minimum per direction, partial hours rounded up to nearest quarter.</p>
+
+      <!-- Service price table -->
+      <div class="price-table-wrap">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Day</th>
+              <th>A/H</th>
+              <th>Urg</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="section-row"><td colspan="4">Available Now</td></tr>
+            <tr>
+              <td>Tire plug / patch<span class="price-note">Tread puncture, no tire needed</span></td>
+              <td>$125</td><td>$175</td><td>$250</td>
+            </tr>
+            <tr>
+              <td>Air pressure check<span class="price-note">All tires</span></td>
+              <td>$75</td><td>$100</td><td>$150</td>
+            </tr>
+            <tr>
+              <td>Glad hand / air hose<span class="price-note">Parts included</span></td>
+              <td>$150</td><td>$225</td><td>$300</td>
+            </tr>
+            <tr>
+              <td>Lights — bulb replacement<span class="price-note">Per fixture, parts included</span></td>
+              <td>$100</td><td>$150</td><td>$200</td>
+            </tr>
+            <tr>
+              <td>Electrical diagnostics<span class="price-note">Trace fault, written estimate</span></td>
+              <td>$175</td><td>$250</td><td>$350</td>
+            </tr>
+            <tr>
+              <td>Electrical repair — simple<span class="price-note">Fuse, ground, connector incl.</span></td>
+              <td>$200</td><td>$275</td><td>$400</td>
+            </tr>
+            <tr class="section-row"><td colspan="4">Tire Replacement <span class="phase-badge">Not Yet Available</span></td></tr>
+            <tr class="phase2-row">
+              <td>Tire replacement — trailer<span class="price-note">Labor only, tire billed separately</span></td>
+              <td>$225</td><td>$325</td><td>$450</td>
+            </tr>
+            <tr class="phase2-row">
+              <td>Tire replacement — drive / steer<span class="price-note">Labor only, tire billed separately</span></td>
+              <td>$275</td><td>$375</td><td>$550</td>
+            </tr>
+            <tr class="phase2-row">
+              <td>Mount only — customer tire<span class="price-note">Break down, mount, torque</span></td>
+              <td>$150</td><td>$225</td><td>$300</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Estimate example -->
+      <div class="estimate-callout">
+        <div class="estimate-callout-title">Example Total — Trailer Tire</div>
+        <div class="est-row"><span>Tire (wholesale + 25% markup)</span><strong>~$281</strong></div>
+        <div class="est-row"><span>Labor — trailer replacement</span><strong>from $225</strong></div>
+        <div class="est-row"><span>Trip charge — 1 hr each way</span><strong>from $300</strong></div>
+        <hr class="est-divider">
+        <div class="est-totals">
+          <div class="est-total-row day"><span>Daytime all-in</span><span>~$806+</span></div>
+          <div class="est-total-row after"><span>After hours</span><span>~$956+</span></div>
+          <div class="est-total-row urgent"><span>Urgent hours</span><span>~$1,056+</span></div>
+        </div>
+      </div>
+
+      <!-- Payment -->
+      <div class="payment-strip">
+        <span class="pay-label">Payment</span>
+        <span class="pay-chip">Cash</span>
+        <span class="pay-chip">Zelle</span>
+        <span class="pay-chip">Venmo</span>
+        <span class="pay-chip">Card</span>
+      </div>
+
+      <p class="pricing-fine-print">Listed prices are minimums, not caps. Final invoice reflects actual time and materials. Payment due on completion. No invoicing for first-time customers. Service area: Topeka / KC metro / I-70 corridor — extended area calls quoted before dispatch.</p>
+
+    </div>
+  </section>
+
+  <!-- ── FORM ── -->
+  <div id="form-wrapper">
+    <main>
+      <form id="service-form" novalidate>
+
+        <!-- CONTACT INFO -->
+        <div class="form-section">
+          <p class="section-label">
+            <span class="req-dot"></span>Your Info
+          </p>
+
+          <div class="field" id="field-name">
+            <label class="field-label" for="trucker-name">
+              Driver Name<span class="req-star">*</span>
+            </label>
+            <input
+              type="text"
+              id="trucker-name"
+              name="trucker_name"
+              placeholder="Your name"
+              autocomplete="name"
+              required
+            >
+            <p class="field-error-msg">Name is required</p>
+          </div>
+
+          <div class="field" id="field-phone">
+            <label class="field-label" for="phone">
+              Phone Number<span class="req-star">*</span>
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="(555) 000-0000"
+              autocomplete="tel"
+              inputmode="tel"
+              required
+            >
+            <p class="field-error-msg">Enter a valid 10-digit phone number</p>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- LOCATION -->
+        <div class="form-section">
+          <p class="section-label">
+            <span class="req-dot"></span>Where Are You?
+          </p>
+
+          <div class="field" id="field-location">
+            <label class="field-label" for="location">
+              Current Location<span class="req-star">*</span>
+            </label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="Mile marker, exit number, truck stop name, city"
+              autocomplete="off"
+              required
+            >
+            <button type="button" id="locate-btn" class="locate-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+              Use My Current Location
+            </button>
+            <div class="maps-tag" id="maps-tag" aria-live="polite">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#f5c200" aria-hidden="true">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+              <span class="maps-tag-coords" id="maps-tag-coords"></span>
+              <a href="" id="maps-tag-link" class="maps-tag-link" target="_blank" rel="noopener noreferrer">View on Maps ↗</a>
+            </div>
+            <p class="field-error-msg">We need your location to reach you</p>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- SERVICE NEEDED -->
+        <div class="form-section">
+          <p class="section-label">
+            <span class="req-dot"></span>What Do You Need?
+          </p>
+
+          <div class="services-field" id="field-services">
+            <div class="service-grid">
+              <div class="svc-toggle">
+                <input type="checkbox" id="svc-flat" name="services" value="Flat tire / blowout">
+                <label for="svc-flat">Flat Tire /<br>Blowout</label>
+              </div>
+              <div class="svc-toggle">
+                <input type="checkbox" id="svc-repair" name="services" value="Tire repair / patch">
+                <label for="svc-repair">Tire Repair /<br>Patch</label>
+              </div>
+              <div class="svc-toggle">
+                <input type="checkbox" id="svc-lights" name="services" value="Lights out (DOT violation)">
+                <label for="svc-lights">Lights Out<br>(DOT Violation)</label>
+              </div>
+              <div class="svc-toggle">
+                <input type="checkbox" id="svc-gladhand" name="services" value="Glad hand / air line issue">
+                <label for="svc-gladhand">Glad Hand /<br>Air Line</label>
+              </div>
+              <div class="svc-toggle">
+                <input type="checkbox" id="svc-electrical" name="services" value="Electrical problem">
+                <label for="svc-electrical">Electrical<br>Problem</label>
+              </div>
+              <div class="svc-toggle full-width">
+                <input type="checkbox" id="svc-other" name="services" value="Other">
+                <label for="svc-other">Other</label>
+              </div>
+            </div>
+            <p class="services-error-msg">Select at least one service</p>
+          </div>
+
+          <!-- TIRE DETAILS — visible when flat/repair checked -->
+          <div class="detail-panel" id="tire-details">
+            <p class="detail-panel-title">Tire Details</p>
+
+            <div class="detail-field">
+              <label class="detail-label" for="tire-size">Tire Size</label>
+              <input type="text" id="tire-size" name="tire_size"
+                placeholder="e.g. 11R22.5, 295/75R22.5, 11R24.5"
+                autocomplete="off">
+            </div>
+
+            <div class="detail-field">
+              <label class="detail-label">Number of Tires</label>
+              <div class="detail-toggles">
+                <div class="detail-toggle">
+                  <input type="radio" id="tires-1" name="tire_count" value="1">
+                  <label for="tires-1">1</label>
+                </div>
+                <div class="detail-toggle">
+                  <input type="radio" id="tires-2" name="tire_count" value="2">
+                  <label for="tires-2">2</label>
+                </div>
+                <div class="detail-toggle">
+                  <input type="radio" id="tires-3" name="tire_count" value="3">
+                  <label for="tires-3">3</label>
+                </div>
+                <div class="detail-toggle">
+                  <input type="radio" id="tires-4" name="tire_count" value="4+">
+                  <label for="tires-4">4+</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail-field">
+              <label class="detail-label">Tire Position</label>
+              <div class="detail-toggles">
+                <div class="detail-toggle">
+                  <input type="checkbox" id="pos-steer" name="tire_position" value="Steer">
+                  <label for="pos-steer">Steer</label>
+                </div>
+                <div class="detail-toggle">
+                  <input type="checkbox" id="pos-drive" name="tire_position" value="Drive">
+                  <label for="pos-drive">Drive</label>
+                </div>
+                <div class="detail-toggle">
+                  <input type="checkbox" id="pos-trailer" name="tire_position" value="Trailer">
+                  <label for="pos-trailer">Trailer</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LIGHTS DETAILS — visible when lights out checked -->
+          <div class="detail-panel" id="lights-details">
+            <p class="detail-panel-title">Which Lights Are Out?</p>
+
+            <div class="detail-field">
+              <div class="detail-toggles">
+                <div class="detail-toggle">
+                  <input type="checkbox" id="lt-head" name="lights_out" value="Headlights">
+                  <label for="lt-head">Headlights</label>
+                </div>
+                <div class="detail-toggle">
+                  <input type="checkbox" id="lt-marker" name="lights_out" value="Marker / Clearance">
+                  <label for="lt-marker">Marker / Clearance</label>
+                </div>
+                <div class="detail-toggle">
+                  <input type="checkbox" id="lt-tail" name="lights_out" value="Tail / Brake">
+                  <label for="lt-tail">Tail / Brake</label>
+                </div>
+                <div class="detail-toggle">
+                  <input type="checkbox" id="lt-turn" name="lights_out" value="Turn Signal">
+                  <label for="lt-turn">Turn Signal</label>
+                </div>
+                <div class="detail-toggle">
+                  <input type="checkbox" id="lt-side" name="lights_out" value="Side Markers">
+                  <label for="lt-side">Side Markers</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <hr class="divider">
+
+        <!-- URGENCY -->
+        <div class="form-section">
+          <p class="section-label">
+            <span class="req-dot"></span>How Urgent?
+          </p>
+
+          <div class="urgency-field" id="field-urgency">
+            <div class="urgency-stack">
+              <div class="urg-option neutral">
+                <input type="radio" id="urg-low" name="urgency" value="I can wait a couple hours">
+                <label for="urg-low">
+                  <span class="urg-dot"></span>
+                  I can wait a couple hours
+                </label>
+              </div>
+              <div class="urg-option moderate">
+                <input type="radio" id="urg-med" name="urgency" value="Need help within the hour">
+                <label for="urg-med">
+                  <span class="urg-dot"></span>
+                  Need help within the hour
+                </label>
+              </div>
+              <div class="urg-option critical">
+                <input type="radio" id="urg-high" name="urgency" value="URGENT — Broken down now">
+                <label for="urg-high">
+                  <span class="urg-dot"></span>
+                  &#9888;&nbsp; URGENT — I am broken down now
+                </label>
+              </div>
+            </div>
+            <p class="urgency-error-msg">Select your urgency level</p>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- TRUCK INFO -->
+        <div class="form-section">
+          <p class="section-label">
+            <span class="req-dot"></span>Truck &amp; Trailer
+          </p>
+
+          <div class="field" id="field-truck">
+            <label class="field-label" for="truck-info">
+              Rig Details<span class="req-star">*</span>
+            </label>
+            <input
+              type="text"
+              id="truck-info"
+              name="truck_info"
+              placeholder="Year, make, number of axles, loaded or empty"
+              autocomplete="off"
+              required
+            >
+            <p class="field-error-msg">Truck info helps us bring the right equipment</p>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- ADDITIONAL NOTES -->
+        <div class="form-section">
+          <p class="section-label">Additional Notes</p>
+
+          <div class="field" id="field-notes">
+            <label class="field-label" for="notes">Anything else we should know?</label>
+            <textarea
+              id="notes"
+              name="notes"
+              placeholder="Gate codes, exact pull-off spot, specific symptoms, anything that helps us prepare before we arrive"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="submit-wrap">
+          <button type="submit" class="submit-btn" id="submit-btn">
+            Send My Request
+          </button>
+        </div>
+
+      </form>
+    </main>
+  </div>
+
+  <!-- ── CONFIRMATION ── -->
+  <div id="confirmation">
+    <div class="confirm-check">
+      <svg viewBox="0 0 24 24" fill="none"
+           stroke="#0e0e0e" stroke-width="3.5"
+           stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+
+    <h2 class="confirm-title">Got it.</h2>
+
+    <p class="confirm-msg">
+      Your service request is in.<br>
+      <strong>We will call you shortly.</strong><br>
+      Keep your phone close and stay off the road if possible.
+    </p>
+
+    <div class="confirm-phone-block">
+      <p class="confirm-phone-label">We will call you at</p>
+      <p class="confirm-phone-num" id="confirm-phone-display"></p>
+    </div>
+
+    <p class="confirm-safety">
+      Stay visible — turn on hazards, use reflective triangles if you have them.
+    </p>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    &copy; Royal Mile Tire &amp; Repair &mdash; Available Anytime, Anywhere
+  </footer>
+
+  <script>
+    // ── Active time tier highlight ───────────────────────────────────
+    (function () {
+      const h = new Date().getHours();
+      const id = h >= 8 && h < 17 ? 'tier-day'
+               : h >= 17 && h < 22 ? 'tier-after'
+               : 'tier-urgent';
+      document.getElementById(id).classList.add('active-tier');
+    })();
+
+    // ================================================================
+    // n8n WEBHOOK ENDPOINT
+    // Paste your n8n Production webhook URL here.
+    // In n8n: open the workflow → click the Webhook node → copy
+    // the "Production URL" (looks like https://your-n8n.com/webhook/truck-service-request)
+    // ================================================================
+    const WEBHOOK_URL = 'https://stabilis.app.n8n.cloud/webhook-test/truck-voicemail';
+    // ================================================================
+
+    const form         = document.getElementById('service-form');
+    const submitBtn    = document.getElementById('submit-btn');
+    const formWrapper  = document.getElementById('form-wrapper');
+    const confirmation = document.getElementById('confirmation');
+    const confirmPhone = document.getElementById('confirm-phone-display');
+
+    // ── Geolocation / My Location ────────────────────────────────────
+    let mapsUrl = null;
+
+    const locateBtn      = document.getElementById('locate-btn');
+    const locationInput  = document.getElementById('location');
+    const mapsTag        = document.getElementById('maps-tag');
+    const mapsTagCoords  = document.getElementById('maps-tag-coords');
+    const mapsTagLink    = document.getElementById('maps-tag-link');
+
+    const LOCATE_DEFAULT_HTML =
+      '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+      '<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z' +
+      'm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>' +
+      '</svg>Use My Current Location';
+
+    locateBtn.addEventListener('click', function () {
+      if (!navigator.geolocation) {
+        locationInput.placeholder = 'GPS not available — type your location';
+        return;
+      }
+
+      locateBtn.disabled    = true;
+      locateBtn.textContent = 'Getting Location…';
+
+      navigator.geolocation.getCurrentPosition(
+        function (pos) {
+          const lat = pos.coords.latitude.toFixed(6);
+          const lng = pos.coords.longitude.toFixed(6);
+          mapsUrl = 'https://www.google.com/maps?q=' + lat + ',' + lng;
+
+          locationInput.value      = 'GPS ' + lat + ', ' + lng;
+          mapsTagCoords.textContent = lat + ', ' + lng;
+          mapsTagLink.href          = mapsUrl;
+          mapsTag.classList.add('visible');
+
+          document.getElementById('field-location').classList.remove('has-error');
+          locateBtn.disabled   = false;
+          locateBtn.innerHTML  = LOCATE_DEFAULT_HTML;
+        },
+        function (err) {
+          locateBtn.disabled  = false;
+          locateBtn.innerHTML = LOCATE_DEFAULT_HTML;
+          const msgs = {
+            1: 'Location permission denied — please type your location.',
+            2: 'Location unavailable — please type your location.',
+            3: 'Location timed out — please type your location.'
+          };
+          // Show error inline instead of alert
+          const field = document.getElementById('field-location');
+          field.classList.add('has-error');
+          field.querySelector('.field-error-msg').textContent =
+            msgs[err.code] || 'Could not get GPS — type your location.';
+        },
+        { enableHighAccuracy: false, maximumAge: 60000, timeout: 10000 }
+      );
+    });
+
+    // ── Phone number auto-formatter ──────────────────────────────────
+    const phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', function () {
+      const digits = this.value.replace(/\D/g, '').slice(0, 10);
+      if (digits.length <= 3) {
+        this.value = digits.length ? '(' + digits : '';
+      } else if (digits.length <= 6) {
+        this.value = '(' + digits.slice(0, 3) + ') ' + digits.slice(3);
+      } else {
+        this.value = '(' + digits.slice(0, 3) + ') ' + digits.slice(3, 6) + '-' + digits.slice(6);
+      }
+    });
+
+    // ── Validation ───────────────────────────────────────────────────
+    function clearErrors () {
+      document.querySelectorAll('.has-error').forEach(el => el.classList.remove('has-error'));
+    }
+
+    function validate () {
+      let valid = true;
+      let firstErrorEl = null;
+
+      function flagField (id, el) {
+        document.getElementById(id).classList.add('has-error');
+        if (!firstErrorEl) firstErrorEl = el || document.querySelector('#' + id + ' input, #' + id + ' textarea');
+        valid = false;
+      }
+
+      // Name
+      const nameVal = document.getElementById('trucker-name').value.trim();
+      if (!nameVal) flagField('field-name');
+
+      // Phone — require 10 digits
+      const phoneDigs = phoneInput.value.replace(/\D/g, '');
+      if (phoneDigs.length < 10) flagField('field-phone', phoneInput);
+
+      // Location
+      if (!document.getElementById('location').value.trim()) flagField('field-location');
+
+      // Services — at least one checked
+      const checkedSvcs = form.querySelectorAll('input[name="services"]:checked');
+      if (checkedSvcs.length === 0) {
+        document.getElementById('field-services').classList.add('has-error');
+        if (!firstErrorEl) firstErrorEl = document.querySelector('#field-services .svc-toggle label');
+        valid = false;
+      }
+
+      // Urgency — one selected
+      if (!form.querySelector('input[name="urgency"]:checked')) {
+        document.getElementById('field-urgency').classList.add('has-error');
+        if (!firstErrorEl) firstErrorEl = document.querySelector('#field-urgency .urg-option label');
+        valid = false;
+      }
+
+      // Truck info
+      if (!document.getElementById('truck-info').value.trim()) flagField('field-truck');
+
+      return { valid, firstErrorEl };
+    }
+
+    // ── Submit ───────────────────────────────────────────────────────
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      clearErrors();
+
+      const { valid, firstErrorEl } = validate();
+
+      if (!valid) {
+        if (firstErrorEl) {
+          firstErrorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        return;
+      }
+
+      const services = Array.from(form.querySelectorAll('input[name="services"]:checked'))
+        .map(cb => cb.value);
+
+      const payload = {
+        trucker_name:    document.getElementById('trucker-name').value.trim(),
+        phone:           phoneInput.value.trim(),
+        location:        document.getElementById('location').value.trim(),
+        maps_url:        mapsUrl || null,
+        services_needed: services,
+        urgency:         form.querySelector('input[name="urgency"]:checked').value,
+        truck_info:      document.getElementById('truck-info').value.trim(),
+        tire_size:       document.getElementById('tire-size').value.trim() || null,
+        tire_count:      form.querySelector('input[name="tire_count"]:checked')?.value || null,
+        tire_position:   Array.from(form.querySelectorAll('input[name="tire_position"]:checked')).map(el => el.value),
+        lights_out:      Array.from(form.querySelectorAll('input[name="lights_out"]:checked')).map(el => el.value),
+        notes:           document.getElementById('notes').value.trim(),
+        submitted_at:    new Date().toISOString(),
+        user_agent:      navigator.userAgent
+      };
+
+      submitBtn.disabled   = true;
+      submitBtn.textContent = 'Sending…';
+
+      try {
+        await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          // Limit wait time — don't leave the driver hanging
+          signal: AbortSignal.timeout ? AbortSignal.timeout(8000) : undefined
+        });
+      } catch (err) {
+        // Delivery failure is logged but does NOT block the confirmation.
+        // In production, consider storing payload to localStorage for retry,
+        // or showing a fallback phone number for the driver to call directly.
+        console.warn('[ServiceRequest] Webhook delivery failed:', err.message);
+      }
+
+      // Show confirmation regardless of network outcome
+      confirmPhone.textContent = payload.phone;
+      formWrapper.classList.add('hidden');
+      confirmation.classList.add('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ── Service detail panel show/hide ──────────────────────────────
+    function updateDetailPanels () {
+      const tireVisible = ['svc-flat', 'svc-repair'].some(id => document.getElementById(id).checked);
+      const lightVisible = document.getElementById('svc-lights').checked;
+      document.getElementById('tire-details').classList.toggle('visible', tireVisible);
+      document.getElementById('lights-details').classList.toggle('visible', lightVisible);
+    }
+
+    form.querySelectorAll('input[name="services"]').forEach(cb => {
+      cb.addEventListener('change', updateDetailPanels);
+    });
+
+    // ── Clear individual field errors on edit ────────────────────────
+    form.addEventListener('input', function (e) {
+      const field = e.target.closest('.field');
+      if (field) field.classList.remove('has-error');
+    });
+
+    form.addEventListener('change', function (e) {
+      const t = e.target;
+      if (t.name === 'services') {
+        document.getElementById('field-services').classList.remove('has-error');
+      }
+      if (t.name === 'urgency') {
+        document.getElementById('field-urgency').classList.remove('has-error');
+      }
+    });
+  </script>
+
+</body>
+</html>

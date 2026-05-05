@@ -1,0 +1,112 @@
+{
+  "name": "Truck Repair — Service Request Handler",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "truck-service-request",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "c7a3b1e2-4d5f-6789-0abc-def123456780",
+      "name": "Service Request Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "truck-service-request"
+    },
+    {
+      "parameters": {
+        "sendTo": "YOUR_EMAIL@gmail.com",
+        "subject": "={{ $json.body.urgency.toUpperCase().includes('URGENT') ? '🚨 URGENT' : '📋 New' }} Service Request — {{ $json.body.trucker_name }}",
+        "emailType": "html",
+        "message": "=<div style=\"font-family:Arial,Helvetica,sans-serif;background:#f0f0f0;padding:24px 12px;margin:0;\"><div style=\"max-width:560px;margin:0 auto;background:#ffffff;border-radius:4px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.12);\"><div style=\"background:#0e0e0e;padding:18px 22px 14px;\"><div style=\"color:#555555;font-size:10px;letter-spacing:4px;text-transform:uppercase;margin:0 0 6px;\">Royal Mile Tire &amp; Repair</div><div style=\"color:#f5c200;font-size:22px;font-weight:800;letter-spacing:1px;margin:0;\">NEW SERVICE REQUEST</div></div><div style=\"background:{{ $json.body.urgency.toUpperCase().includes('URGENT') ? '#c43300' : $json.body.urgency.toLowerCase().includes('within') ? '#b07800' : '#3a3a3a' }};padding:11px 22px;\"><span style=\"color:#ffffff;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;\">{{ $json.body.urgency }}</span></div><div style=\"padding:22px 22px 10px;\"><table style=\"width:100%;border-collapse:collapse;font-size:14px;color:#111111;\"><tr><td style=\"padding:10px 16px 10px 0;border-bottom:1px solid #eeeeee;color:#999999;font-size:10px;letter-spacing:2px;text-transform:uppercase;width:110px;vertical-align:top;\">Driver</td><td style=\"padding:10px 0;border-bottom:1px solid #eeeeee;font-weight:700;font-size:15px;\">{{ $json.body.trucker_name }}</td></tr><tr><td style=\"padding:10px 16px 10px 0;border-bottom:1px solid #eeeeee;color:#999999;font-size:10px;letter-spacing:2px;text-transform:uppercase;vertical-align:top;\">Phone</td><td style=\"padding:10px 0;border-bottom:1px solid #eeeeee;font-size:20px;font-weight:700;letter-spacing:1px;\"><a href=\"tel:{{ $json.body.phone.replace(/\\D/g,'') }}\" style=\"color:#111111;text-decoration:none;\">{{ $json.body.phone }}</a></td></tr><tr><td style=\"padding:10px 16px 10px 0;border-bottom:1px solid #eeeeee;color:#999999;font-size:10px;letter-spacing:2px;text-transform:uppercase;vertical-align:top;\">Location</td><td style=\"padding:10px 0;border-bottom:1px solid #eeeeee;\">{{ $json.body.location }}</td></tr>{{ $json.body.maps_url ? '<tr><td style=\"padding:10px 16px 10px 0;border-bottom:1px solid #eeeeee;color:#999999;font-size:10px;letter-spacing:2px;text-transform:uppercase;vertical-align:top;\">Maps</td><td style=\"padding:10px 0;border-bottom:1px solid #eeeeee;\"><a href=\"' + $json.body.maps_url + '\" style=\"color:#1a73e8;font-size:13px;\">Open in Google Maps ↗</a></td></tr>' : '' }}<tr><td style=\"padding:10px 16px 10px 0;border-bottom:1px solid #eeeeee;color:#999999;font-size:10px;letter-spacing:2px;text-transform:uppercase;vertical-align:top;\">Services</td><td style=\"padding:10px 0;border-bottom:1px solid #eeeeee;\">{{ $json.body.services_needed.join(' &bull; ') }}</td></tr><tr><td style=\"padding:10px 16px 10px 0;border-bottom:1px solid #eeeeee;color:#999999;font-size:10px;letter-spacing:2px;text-transform:uppercase;vertical-align:top;\">Truck / Trailer</td><td style=\"padding:10px 0;border-bottom:1px solid #eeeeee;\">{{ $json.body.truck_info }}</td></tr>{{ $json.body.notes ? '<tr><td style=\"padding:10px 16px 10px 0;border-bottom:1px solid #eeeeee;color:#999999;font-size:10px;letter-spacing:2px;text-transform:uppercase;vertical-align:top;\">Notes</td><td style=\"padding:10px 0;border-bottom:1px solid #eeeeee;\">' + $json.body.notes + '</td></tr>' : '' }}<tr><td style=\"padding:10px 16px 10px 0;color:#999999;font-size:10px;letter-spacing:2px;text-transform:uppercase;vertical-align:top;\">Submitted</td><td style=\"padding:10px 0;color:#aaaaaa;font-size:12px;\">{{ $json.body.submitted_at }}</td></tr></table></div><div style=\"background:#f8f8f8;border-top:1px solid #eeeeee;padding:13px 22px;\"><p style=\"color:#bbbbbb;font-size:11px;margin:0;\">Submitted via Royal Mile Tire &amp; Repair service request form.</p></div></div></div>",
+        "options": {}
+      },
+      "id": "a1b2c3d4-5e6f-7890-abcd-ef1234567891",
+      "name": "Send Gmail Notification",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [500, 160],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REPLACE_WITH_YOUR_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_GOOGLE_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp":   "={{ $json.body.submitted_at }}",
+            "Driver Name": "={{ $json.body.trucker_name }}",
+            "Phone":       "={{ $json.body.phone }}",
+            "Location":    "={{ $json.body.location }}",
+            "Maps Link":   "={{ $json.body.maps_url ?? '' }}",
+            "Services":    "={{ $json.body.services_needed.join(', ') }}",
+            "Urgency":     "={{ $json.body.urgency }}",
+            "Truck Info":  "={{ $json.body.truck_info }}",
+            "Notes":       "={{ $json.body.notes ?? '' }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {"id": "Timestamp",   "displayName": "Timestamp",   "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string", "removed": false},
+            {"id": "Driver Name", "displayName": "Driver Name", "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string", "removed": false},
+            {"id": "Phone",       "displayName": "Phone",       "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string", "removed": false},
+            {"id": "Location",    "displayName": "Location",    "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string", "removed": false},
+            {"id": "Maps Link",   "displayName": "Maps Link",   "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string", "removed": false},
+            {"id": "Services",    "displayName": "Services",    "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string", "removed": false},
+            {"id": "Urgency",     "displayName": "Urgency",     "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string", "removed": false},
+            {"id": "Truck Info",  "displayName": "Truck Info",  "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string", "removed": false},
+            {"id": "Notes",       "displayName": "Notes",       "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string", "removed": false}
+          ]
+        },
+        "options": {}
+      },
+      "id": "b2c3d4e5-6f7a-8901-bcde-f23456789013",
+      "name": "Log to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [500, 440],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_WITH_YOUR_GOOGLE_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Service Request Webhook": {
+      "main": [
+        [
+          {"node": "Send Gmail Notification", "type": "main", "index": 0},
+          {"node": "Log to Google Sheets",    "type": "main", "index": 0}
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "id": "truck-repair-service-request",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": ""
+  }
+}
