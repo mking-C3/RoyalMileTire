@@ -323,6 +323,28 @@
       grid-column: 1 / -1;
     }
 
+    /* Coming-soon service toggle */
+    .svc-toggle.coming-soon label {
+      opacity: 0.42;
+      cursor: not-allowed;
+      position: relative;
+    }
+    .svc-toggle.coming-soon label::after {
+      content: 'Coming Soon';
+      display: block;
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .svc-toggle.coming-soon input:checked + label {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text-muted);
+    }
+
     .services-field.has-error .service-grid {
       outline: 1.5px solid var(--error);
       border-radius: 3px;
@@ -1407,8 +1429,8 @@
 
           <div class="services-field" id="field-services">
             <div class="service-grid">
-              <div class="svc-toggle">
-                <input type="checkbox" id="svc-flat" name="services" value="Flat tire / blowout">
+              <div class="svc-toggle coming-soon">
+                <input type="checkbox" id="svc-flat" name="services" value="Flat tire / blowout" disabled>
                 <label for="svc-flat">Flat Tire /<br>Blowout</label>
               </div>
               <div class="svc-toggle">
