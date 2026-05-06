@@ -898,6 +898,55 @@
 
     .price-table .phase2-row td { opacity: 0.65; }
 
+    /* Active column highlight in price table */
+    .price-table thead th[data-col] { transition: color 0.2s, background 0.2s; }
+    .price-table tbody td[data-col] { transition: color 0.2s, background 0.2s; }
+
+    /* Day column */
+    .price-table.col-day thead th[data-col="day"] {
+      color: var(--text);
+      background: #1e1e1e;
+      box-shadow: inset 0 -2px 0 var(--text-dim);
+    }
+    .price-table.col-day tbody td[data-col="day"] {
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+      box-shadow: inset 2px 0 0 var(--text-dim), inset -2px 0 0 var(--text-dim);
+    }
+    .price-table.col-day tbody tr:last-child td[data-col="day"] {
+      box-shadow: inset 2px 0 0 var(--text-dim), inset -2px 0 0 var(--text-dim), inset 0 -2px 0 var(--text-dim);
+    }
+
+    /* After-hours column */
+    .price-table.col-after thead th[data-col="after"] {
+      color: var(--warn);
+      background: #1a1200;
+      box-shadow: inset 0 -2px 0 var(--warn);
+    }
+    .price-table.col-after tbody td[data-col="after"] {
+      color: var(--warn);
+      background: rgba(255,170,0,0.05);
+      box-shadow: inset 2px 0 0 var(--warn), inset -2px 0 0 var(--warn);
+    }
+    .price-table.col-after tbody tr:last-child td[data-col="after"] {
+      box-shadow: inset 2px 0 0 var(--warn), inset -2px 0 0 var(--warn), inset 0 -2px 0 var(--warn);
+    }
+
+    /* Urgent column */
+    .price-table.col-urgent thead th[data-col="urg"] {
+      color: var(--urgent);
+      background: #180700;
+      box-shadow: inset 0 -2px 0 var(--urgent);
+    }
+    .price-table.col-urgent tbody td[data-col="urg"] {
+      color: var(--urgent);
+      background: rgba(255,80,0,0.05);
+      box-shadow: inset 2px 0 0 var(--urgent), inset -2px 0 0 var(--urgent);
+    }
+    .price-table.col-urgent tbody tr:last-child td[data-col="urg"] {
+      box-shadow: inset 2px 0 0 var(--urgent), inset -2px 0 0 var(--urgent), inset 0 -2px 0 var(--urgent);
+    }
+
     .phase-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -971,6 +1020,16 @@
     .est-total-row.day    { color: var(--text); }
     .est-total-row.after  { color: var(--warn); }
     .est-total-row.urgent { color: var(--urgent); }
+
+    /* Active estimate total row */
+    .est-total-row.active-est {
+      padding: 3px 6px;
+      margin: 0 -6px;
+      border-radius: 2px;
+    }
+    .est-total-row.day.active-est    { background: rgba(255,255,255,0.06); border-left: 2px solid var(--text-dim); padding-left: 5px; }
+    .est-total-row.after.active-est  { background: rgba(255,170,0,0.08);   border-left: 2px solid var(--warn);     padding-left: 5px; }
+    .est-total-row.urgent.active-est { background: rgba(255,80,0,0.08);    border-left: 2px solid var(--urgent);   padding-left: 5px; }
 
     /* Payment */
     .payment-strip {
@@ -1263,49 +1322,49 @@
           <thead>
             <tr>
               <th>Service</th>
-              <th>Day</th>
-              <th>A/H</th>
-              <th>Urg</th>
+              <th data-col="day">Day</th>
+              <th data-col="after">A/H</th>
+              <th data-col="urg">Urg</th>
             </tr>
           </thead>
           <tbody>
             <tr class="section-row"><td colspan="4">Available Now</td></tr>
             <tr>
               <td>Tire plug / patch<span class="price-note">Tread puncture, no tire needed</span></td>
-              <td>$125</td><td>$175</td><td>$250</td>
+              <td data-col="day">$125</td><td data-col="after">$175</td><td data-col="urg">$250</td>
             </tr>
             <tr>
               <td>Air pressure check<span class="price-note">All tires</span></td>
-              <td>$75</td><td>$100</td><td>$150</td>
+              <td data-col="day">$75</td><td data-col="after">$100</td><td data-col="urg">$150</td>
             </tr>
             <tr>
               <td>Glad hand / air hose<span class="price-note">Parts included</span></td>
-              <td>$150</td><td>$225</td><td>$300</td>
+              <td data-col="day">$150</td><td data-col="after">$225</td><td data-col="urg">$300</td>
             </tr>
             <tr>
               <td>Lights — bulb replacement<span class="price-note">Per fixture, parts included</span></td>
-              <td>$100</td><td>$150</td><td>$200</td>
+              <td data-col="day">$100</td><td data-col="after">$150</td><td data-col="urg">$200</td>
             </tr>
             <tr>
               <td>Electrical diagnostics<span class="price-note">Trace fault, written estimate</span></td>
-              <td>$175</td><td>$250</td><td>$350</td>
+              <td data-col="day">$175</td><td data-col="after">$250</td><td data-col="urg">$350</td>
             </tr>
             <tr>
               <td>Electrical repair — simple<span class="price-note">Fuse, ground, connector incl.</span></td>
-              <td>$200</td><td>$275</td><td>$400</td>
+              <td data-col="day">$200</td><td data-col="after">$275</td><td data-col="urg">$400</td>
             </tr>
             <tr class="section-row"><td colspan="4">Tire Replacement <span class="phase-badge">Not Yet Available</span></td></tr>
             <tr class="phase2-row">
               <td>Tire replacement — trailer<span class="price-note">Labor only, tire billed separately</span></td>
-              <td>$225</td><td>$325</td><td>$450</td>
+              <td data-col="day">$225</td><td data-col="after">$325</td><td data-col="urg">$450</td>
             </tr>
             <tr class="phase2-row">
               <td>Tire replacement — drive / steer<span class="price-note">Labor only, tire billed separately</span></td>
-              <td>$275</td><td>$375</td><td>$550</td>
+              <td data-col="day">$275</td><td data-col="after">$375</td><td data-col="urg">$550</td>
             </tr>
             <tr class="phase2-row">
               <td>Mount only — customer tire<span class="price-note">Break down, mount, torque</span></td>
-              <td>$150</td><td>$225</td><td>$300</td>
+              <td data-col="day">$150</td><td data-col="after">$225</td><td data-col="urg">$300</td>
             </tr>
           </tbody>
         </table>
@@ -1681,6 +1740,16 @@
                : h >= 17 && h < 22 ? 'tier-after'
                : 'tier-urgent';
       document.getElementById(id).classList.add('active-tier');
+      // Highlight the matching price column
+      const colClass = id === 'tier-day' ? 'col-day'
+                     : id === 'tier-after' ? 'col-after'
+                     : 'col-urgent';
+      document.querySelector('.price-table').classList.add(colClass);
+      // Highlight the matching estimate total row
+      const estRow = id === 'tier-day' ? '.est-total-row.day'
+                   : id === 'tier-after' ? '.est-total-row.after'
+                   : '.est-total-row.urgent';
+      document.querySelector(estRow).classList.add('active-est');
     })();
 
     // ================================================================
