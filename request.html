@@ -4,14 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="theme-color" content="#0e0e0e">
-  <meta name="description" content="Royal Mile Tire &amp; Repair — roadside commercial truck and tire service. Tell us where you are and what you need. We come to you, 24/7.">
-  <title>Royal Mile Tire &amp; Repair — Request Service</title>
+  <meta name="description" content="Royal Mile Tire &amp; Repair â€” roadside commercial truck and tire service. Tell us where you are and what you need. We come to you, 24/7.">
+  <title>Royal Mile Tire &amp; Repair â€” Request Service</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
+    *:focus-visible { outline: 2px solid #f5c200; outline-offset: 2px; }
     /* ============================================================
        RESET & CUSTOM PROPERTIES
     ============================================================ */
@@ -172,7 +173,7 @@
     }
 
     /* ============================================================
-       FORM FIELDS — TEXT / TEL / TEXTAREA
+       FORM FIELDS â€” TEXT / TEL / TEXTAREA
     ============================================================ */
     .field {
       margin-bottom: 16px;
@@ -440,7 +441,7 @@
       box-shadow: inset 0 0 0 4px var(--surface);
     }
 
-    /* Urgent option — always visually heavier */
+    /* Urgent option â€” always visually heavier */
     .urg-option.critical label {
       border-color: #2e1a10;
       font-size: 1.05rem;
@@ -693,7 +694,7 @@
     }
 
     .confirm-safety::before {
-      content: '⚠ ';
+      content: 'âš  ';
       color: var(--warn);
     }
 
@@ -1256,36 +1257,334 @@
     }
 
     /* ============================================================
-       RESPONSIVE — small phones
+       RESPONSIVE â€” small phones
     ============================================================ */
     @media (max-width: 380px) {
       .header-text h1 { font-size: 1.6rem; }
       .service-grid   { grid-template-columns: 1fr; }
       .svc-toggle.full-width { grid-column: 1; }
     }
+
+    /* ============================================================
+       GLOBAL NAV (Phase 5)
+    ============================================================ */
+    .rmt-nav {
+      background: var(--bg);
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .rmt-nav-inner {
+      max-width: 1020px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      position: relative;
+    }
+    .rmt-nav-brand {
+      text-decoration: none;
+      color: inherit;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .rmt-nav-brand-name {
+      font-family: 'Bebas Neue', Impact, sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.04em;
+      color: var(--yellow);
+      text-transform: uppercase;
+    }
+    .rmt-nav-brand-sub {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+    .rmt-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      margin-left: auto;
+    }
+    .rmt-nav-link,
+    .rmt-nav-drop > button {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.92rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 9px 11px;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: color 0.13s, background 0.13s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      font-weight: 400;
+    }
+    @media (hover: hover) {
+      .rmt-nav-link:hover,
+      .rmt-nav-drop > button:hover {
+        color: var(--yellow);
+        background: rgba(245, 194, 0, 0.05);
+      }
+    }
+    .rmt-nav-drop { position: relative; }
+    .rmt-nav-drop > button::after {
+      content: '\25BE';
+      font-size: 0.8em;
+      margin-left: 2px;
+      opacity: 0.7;
+    }
+    .rmt-nav-drop-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 220px;
+      background: var(--surface);
+      border: 1px solid var(--border-mid);
+      border-radius: 3px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+      padding: 6px;
+      z-index: 210;
+    }
+    .rmt-nav-drop.open > .rmt-nav-drop-menu { display: block; }
+    .rmt-nav-drop-menu a {
+      display: block;
+      padding: 9px 12px;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-family: 'Roboto Condensed', sans-serif;
+      font-size: 0.92rem;
+      border-radius: 2px;
+      transition: color 0.13s, background 0.13s;
+    }
+    @media (hover: hover) {
+      .rmt-nav-drop-menu a:hover {
+        color: var(--yellow);
+        background: var(--yellow-glow);
+      }
+    }
+    .rmt-nav-phone {
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      padding: 9px 10px;
+      white-space: nowrap;
+    }
+    @media (hover: hover) {
+      .rmt-nav-phone:hover { color: var(--yellow); }
+    }
+    .rmt-nav-cta {
+      background: var(--yellow);
+      color: #0e0e0e;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 14px 8px;
+      border-radius: 3px;
+      transition: background 0.13s;
+      white-space: nowrap;
+    }
+    .rmt-nav-cta:active { background: var(--yellow-dark); }
+    @media (hover: hover) {
+      .rmt-nav-cta:hover { background: #ffd030; }
+    }
+    .rmt-nav-burger {
+      display: none;
+      background: none;
+      border: 1.5px solid var(--border-mid);
+      border-radius: 3px;
+      color: var(--text);
+      padding: 7px 10px;
+      cursor: pointer;
+      margin-left: auto;
+      line-height: 0;
+    }
+
+    @media (max-width: 880px) {
+      .rmt-nav-burger { display: inline-flex; }
+      .rmt-nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        border-bottom: 2px solid var(--border);
+        padding: 8px 12px 16px;
+        margin-left: 0;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+      }
+      .rmt-nav.open .rmt-nav-links { display: flex; }
+      .rmt-nav-link,
+      .rmt-nav-drop > button,
+      .rmt-nav-phone {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 12px 8px;
+        border-bottom: 1px solid var(--border);
+        border-radius: 0;
+      }
+      .rmt-nav-drop { width: 100%; }
+      .rmt-nav-drop > button { display: flex; }
+      .rmt-nav-drop > button::after { margin-left: auto; }
+      .rmt-nav-drop-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+        padding: 4px 0 8px 14px;
+        min-width: 0;
+      }
+      .rmt-nav-drop-menu a { padding: 8px 12px; }
+      .rmt-nav-cta {
+        margin-top: 12px;
+        text-align: center;
+        width: 100%;
+        padding: 14px 14px 12px;
+      }
+    }
+
+    .rmt-back-strip {
+      display: block;
+      background: var(--bg);
+      padding: 9px 16px;
+      border-bottom: 1px solid var(--border);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+    }
+    @media (hover: hover) {
+      .rmt-back-strip:hover { color: var(--yellow); }
+    }
+
+    /* ============================================================
+       GLOBAL FOOTER (Phase 5)
+    ============================================================ */
+    .rmt-footer {
+      border-top: 2px solid var(--border);
+      padding: 22px 20px 26px;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .rmt-footer-nap {
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
+      line-height: 1.55;
+      margin-bottom: 6px;
+    }
+    .rmt-footer-nap a {
+      color: var(--yellow);
+      text-decoration: none;
+    }
+    @media (hover: hover) {
+      .rmt-footer-nap a:hover { text-decoration: underline; }
+    }
+    .rmt-footer-hours {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .rmt-footer-pay { margin-bottom: 12px; }
+    .rmt-footer-pay .pay-chip {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border-mid);
+      border-radius: 2px;
+      padding: 2px 8px;
+      margin: 0 2px 4px;
+      color: var(--text-dim);
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+    }
+    .rmt-footer-copy {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
   </style>
 </head>
 <body>
 
-  <!-- ── CAUTION STRIPE ── -->
+  <!-- â”€â”€ CAUTION STRIPE â”€â”€ -->
   <div class="caution-stripe"></div>
 
-  <!-- ── HEADER ── -->
-  <header>
-    <div class="header-inner">
-      <div class="header-text">
-        <a href="index.html" style="text-decoration:none;color:inherit;display:block;">
-          <h1>Royal Mile<br>Tire &amp; Repair</h1>
-        </a>
-        <p class="header-sub">Tell us what you need. We will come to you.</p>
+  <!-- Global Nav -->
+  <nav class="rmt-nav" id="rmt-nav">
+    <div class="rmt-nav-inner">
+      <a href="/" class="rmt-nav-brand" aria-label="Royal Mile Tire and Repair home">
+        <span class="rmt-nav-brand-name">Royal Mile Tire &amp; Repair</span>
+        <span class="rmt-nav-brand-sub">Roadside truck service. We come to you.</span>
+      </a>
+      <button type="button" class="rmt-nav-burger" id="rmt-nav-burger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="rmt-nav-links">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <div class="rmt-nav-links" id="rmt-nav-links">
+        <div class="rmt-nav-drop" data-drop>
+          <button type="button" aria-expanded="false">Services</button>
+          <div class="rmt-nav-drop-menu">
+            <a href="/services/tire-repair.html">Tire Repair</a>
+            <a href="/services/glad-hand-replacement.html">Glad Hand Replacement</a>
+            <a href="/services/air-line-repair.html">Air Line Repair</a>
+            <a href="/services/trailer-lighting.html">Trailer Lighting</a>
+            <a href="/services/electrical-repair.html">Electrical Repair</a>
+          </div>
+        </div>
+        <div class="rmt-nav-drop" data-drop>
+          <button type="button" aria-expanded="false">Service Areas</button>
+          <div class="rmt-nav-drop-menu">
+            <a href="/locations/ottawa.html">Ottawa</a>
+            <a href="/locations/olathe.html">Olathe</a>
+            <a href="/locations/paola.html">Paola</a>
+            <a href="/locations/gardner.html">Gardner</a>
+            <a href="/locations/spring-hill.html">Spring Hill</a>
+            <a href="/locations/lawrence.html">Lawrence</a>
+            <a href="/locations/overland-park.html">Overland Park</a>
+          </div>
+        </div>
+        <a href="tel:+18667692580" class="rmt-nav-phone">866.ROYAL.80</a>
+        <a href="/request.html" class="rmt-nav-cta">Request Service</a>
       </div>
-      <span class="header-badge">Nights / Weekends</span>
     </div>
-  </header>
+  </nav>
 
-  <a href="index.html" style="display:block;background:var(--bg);padding:9px 16px;border-bottom:1px solid var(--border);font-family:'Bebas Neue',sans-serif;font-size:0.78rem;letter-spacing:0.14em;color:var(--text-dim);text-transform:uppercase;text-decoration:none;text-align:center;">← Back to Home</a>
+  <a href="/" class="rmt-back-strip">&larr; Back to Home</a>
 
-  <!-- ── PRICING ── -->
+  <!-- â”€â”€ PRICING â”€â”€ -->
   <section class="pricing-section">
     <div class="pricing-inner">
 
@@ -1297,25 +1596,25 @@
       <!-- Time tiers -->
       <div class="tier-grid">
         <div class="tier-card tier-day" id="tier-day">
-          <div class="t-time">8am – 5pm</div>
+          <div class="t-time">8am â€“ 5pm</div>
           <div class="t-name">Weekend<br>Daytime</div>
           <div class="t-trip">$150/hr trip</div>
           <div class="t-mult">Base rate</div>
         </div>
         <div class="tier-card tier-after" id="tier-after">
-          <div class="t-time">5pm – 9:59pm</div>
+          <div class="t-time">5pm â€“ 9:59pm</div>
           <div class="t-name">After Hours</div>
           <div class="t-trip">$225/hr trip</div>
-          <div class="t-mult">1.4× rate</div>
+          <div class="t-mult">1.4Ã— rate</div>
         </div>
         <div class="tier-card tier-urgent" id="tier-urgent">
-          <div class="t-time">10pm – 8am</div>
+          <div class="t-time">10pm â€“ 8am</div>
           <div class="t-name">Urgent Hours</div>
           <div class="t-trip">$300/hr trip</div>
-          <div class="t-mult">2.0× rate</div>
+          <div class="t-mult">2.0Ã— rate</div>
         </div>
       </div>
-      <p class="tier-note">Tier set by dispatch time. Trip charge billed both ways — 1 hr minimum per direction, partial hours rounded up to nearest quarter.</p>
+      <p class="tier-note">Tier set by dispatch time. Trip charge billed both ways â€” 1 hr minimum per direction, partial hours rounded up to nearest quarter.</p>
 
       <!-- Service price table -->
       <div class="price-table-wrap">
@@ -1343,7 +1642,7 @@
               <td data-col="day">$150</td><td data-col="after">$225</td><td data-col="urg">$300</td>
             </tr>
             <tr>
-              <td>Lights — bulb replacement<span class="price-note">Per fixture, parts included</span></td>
+              <td>Lights â€” bulb replacement<span class="price-note">Per fixture, parts included</span></td>
               <td data-col="day">$100</td><td data-col="after">$150</td><td data-col="urg">$200</td>
             </tr>
             <tr>
@@ -1351,20 +1650,20 @@
               <td data-col="day">$175</td><td data-col="after">$250</td><td data-col="urg">$350</td>
             </tr>
             <tr>
-              <td>Electrical repair — simple<span class="price-note">Fuse, ground, connector incl.</span></td>
+              <td>Electrical repair â€” simple<span class="price-note">Fuse, ground, connector incl.</span></td>
               <td data-col="day">$200</td><td data-col="after">$275</td><td data-col="urg">$400</td>
             </tr>
             <tr class="section-row"><td colspan="4">Tire Replacement <span class="phase-badge">Not Yet Available</span></td></tr>
             <tr class="phase2-row">
-              <td>Tire replacement — trailer<span class="price-note">Labor only, tire billed separately</span></td>
+              <td>Tire replacement â€” trailer<span class="price-note">Labor only, tire billed separately</span></td>
               <td data-col="day">$225</td><td data-col="after">$325</td><td data-col="urg">$450</td>
             </tr>
             <tr class="phase2-row">
-              <td>Tire replacement — drive / steer<span class="price-note">Labor only, tire billed separately</span></td>
+              <td>Tire replacement â€” drive / steer<span class="price-note">Labor only, tire billed separately</span></td>
               <td data-col="day">$275</td><td data-col="after">$375</td><td data-col="urg">$550</td>
             </tr>
             <tr class="phase2-row">
-              <td>Mount only — customer tire<span class="price-note">Break down, mount, torque</span></td>
+              <td>Mount only â€” customer tire<span class="price-note">Break down, mount, torque</span></td>
               <td data-col="day">$150</td><td data-col="after">$225</td><td data-col="urg">$300</td>
             </tr>
           </tbody>
@@ -1373,10 +1672,10 @@
 
       <!-- Estimate example -->
       <div class="estimate-callout">
-        <div class="estimate-callout-title">Example Total — Trailer Tire</div>
+        <div class="estimate-callout-title">Example Total â€” Trailer Tire</div>
         <div class="est-row"><span>Tire (wholesale + 25% markup)</span><strong>~$281</strong></div>
-        <div class="est-row"><span>Labor — trailer replacement</span><strong>from $225</strong></div>
-        <div class="est-row"><span>Trip charge — 1 hr each way</span><strong>from $300</strong></div>
+        <div class="est-row"><span>Labor â€” trailer replacement</span><strong>from $225</strong></div>
+        <div class="est-row"><span>Trip charge â€” 1 hr each way</span><strong>from $300</strong></div>
         <hr class="est-divider">
         <div class="est-totals">
           <div class="est-total-row day"><span>Daytime all-in</span><span>~$806+</span></div>
@@ -1394,12 +1693,12 @@
         <span class="pay-chip">Card</span>
       </div>
 
-      <p class="pricing-fine-print">Listed prices are minimums, not caps. Final invoice reflects actual time and materials. Payment due on completion. No invoicing for first-time customers. Service area: Topeka / KC metro / I-70 corridor — extended area calls quoted before dispatch.</p>
+      <p class="pricing-fine-print">Listed prices are minimums, not caps. Final invoice reflects actual time and materials. Payment due on completion. No invoicing for first-time customers. Service area: Topeka / KC metro / I-70 corridor â€” extended area calls quoted before dispatch.</p>
 
     </div>
   </section>
 
-  <!-- ── FORM ── -->
+  <!-- â”€â”€ FORM â”€â”€ -->
   <div id="form-wrapper">
     <main>
       <form id="service-form" novalidate>
@@ -1473,7 +1772,7 @@
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
               </svg>
               <span class="maps-tag-coords" id="maps-tag-coords"></span>
-              <a href="" id="maps-tag-link" class="maps-tag-link" target="_blank" rel="noopener noreferrer">View on Maps ↗</a>
+              <a href="" id="maps-tag-link" class="maps-tag-link" target="_blank" rel="noopener noreferrer">View on Maps â†—</a>
             </div>
             <p class="field-error-msg">We need your location to reach you</p>
           </div>
@@ -1517,7 +1816,7 @@
             <p class="services-error-msg">Select at least one service</p>
           </div>
 
-          <!-- TIRE DETAILS — visible when flat/repair checked -->
+          <!-- TIRE DETAILS â€” visible when flat/repair checked -->
           <div class="detail-panel" id="tire-details">
             <p class="detail-panel-title">Tire Details</p>
 
@@ -1569,7 +1868,7 @@
             </div>
           </div>
 
-          <!-- LIGHTS DETAILS — visible when lights out checked -->
+          <!-- LIGHTS DETAILS â€” visible when lights out checked -->
           <div class="detail-panel" id="lights-details">
             <p class="detail-panel-title">Which Lights Are Out?</p>
 
@@ -1626,10 +1925,10 @@
                 </label>
               </div>
               <div class="urg-option critical">
-                <input type="radio" id="urg-high" name="urgency" value="URGENT — Broken down now">
+                <input type="radio" id="urg-high" name="urgency" value="URGENT â€” Broken down now">
                 <label for="urg-high">
                   <span class="urg-dot"></span>
-                  &#9888;&nbsp; URGENT — I am broken down now
+                  &#9888;&nbsp; URGENT â€” I am broken down now
                 </label>
               </div>
             </div>
@@ -1680,7 +1979,7 @@
         <!-- PHOTOS -->
         <hr class="divider">
         <div class="form-section">
-          <p class="section-label">Photos <span style="color:var(--text-muted);font-size:0.78rem;letter-spacing:0;text-transform:none;font-family:'Roboto Condensed',sans-serif;">(optional — up to 4)</span></p>
+          <p class="section-label">Photos <span style="color:var(--text-muted);font-size:0.78rem;letter-spacing:0;text-transform:none;font-family:'Roboto Condensed',sans-serif;">(optional â€” up to 4)</span></p>
           <input type="file" id="photo-input" accept="image/*" multiple style="display:none;">
           <button type="button" class="photo-upload-btn" id="photo-btn">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
@@ -1700,7 +1999,7 @@
     </main>
   </div>
 
-  <!-- ── CONFIRMATION ── -->
+  <!-- â”€â”€ CONFIRMATION â”€â”€ -->
   <div id="confirmation">
     <div class="confirm-check">
       <svg viewBox="0 0 24 24" fill="none"
@@ -1724,17 +2023,69 @@
     </div>
 
     <p class="confirm-safety">
-      Stay visible — turn on hazards, use reflective triangles if you have them.
+      Stay visible â€” turn on hazards, use reflective triangles if you have them.
     </p>
   </div>
 
-  <!-- ── FOOTER ── -->
-  <footer>
-    &copy; Royal Mile Tire &amp; Repair &mdash; Available Anytime, Anywhere
+  <!-- Global Footer -->
+  <footer class="rmt-footer" itemscope itemtype="https://schema.org/Organization">
+    <p class="rmt-footer-nap">
+      <span itemprop="name">Royal Mile Tire &amp; Repair</span> &middot; <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress"><span itemprop="addressLocality">Hillsdale</span>, <span itemprop="addressRegion">KS</span></span> &middot; <a href="tel:+18667692580" itemprop="telephone">866.769.2580</a>
+    </p>
+    <p class="rmt-footer-hours">Available 24/7</p>
+    <div class="rmt-footer-pay">
+      <span class="pay-chip">Cash</span>
+      <span class="pay-chip">Zelle</span>
+      <span class="pay-chip">Venmo</span>
+      <span class="pay-chip">Card</span>
+    </div>
+    <p class="rmt-footer-copy">&copy; Royal Mile Tire &amp; Repair &middot; royalmiletire.com</p>
   </footer>
 
   <script>
-    // ── Active time tier highlight ───────────────────────────────────
+    // â”€â”€ Global nav (hamburger + dropdowns) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    (function () {
+      var nav = document.getElementById('rmt-nav');
+      if (!nav) return;
+      var burger = document.getElementById('rmt-nav-burger');
+      if (burger) {
+        burger.addEventListener('click', function () {
+          var open = nav.classList.toggle('open');
+          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+      var drops = nav.querySelectorAll('[data-drop]');
+      drops.forEach(function (d) {
+        var btn = d.querySelector('button');
+        if (!btn) return;
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var isOpen = d.classList.contains('open');
+          drops.forEach(function (x) {
+            x.classList.remove('open');
+            var b = x.querySelector('button');
+            if (b) b.setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            d.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+      document.addEventListener('click', function (e) {
+        if (!nav.contains(e.target)) {
+          drops.forEach(function (x) {
+            x.classList.remove('open');
+            var b = x.querySelector('button');
+            if (b) b.setAttribute('aria-expanded', 'false');
+          });
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    // â”€â”€ Active time tier highlight â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     (function () {
       const h = new Date().getHours();
       const id = h >= 8 && h < 17 ? 'tier-day'
@@ -1756,7 +2107,7 @@
     // ================================================================
     // n8n WEBHOOK ENDPOINT
     // Paste your n8n Production webhook URL here.
-    // In n8n: open the workflow → click the Webhook node → copy
+    // In n8n: open the workflow â†’ click the Webhook node â†’ copy
     // the "Production URL" (looks like https://your-n8n.com/webhook/truck-service-request)
     // ================================================================
     const WEBHOOK_URL = 'https://stabilis.app.n8n.cloud/webhook/truck-service-request';
@@ -1768,7 +2119,7 @@
     const confirmation = document.getElementById('confirmation');
     const confirmPhone = document.getElementById('confirm-phone-display');
 
-    // ── Geolocation / My Location ────────────────────────────────────
+    // â”€â”€ Geolocation / My Location â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     let mapsUrl = null;
 
     const locateBtn      = document.getElementById('locate-btn');
@@ -1785,12 +2136,12 @@
 
     locateBtn.addEventListener('click', function () {
       if (!navigator.geolocation) {
-        locationInput.placeholder = 'GPS not available — type your location';
+        locationInput.placeholder = 'GPS not available â€” type your location';
         return;
       }
 
       locateBtn.disabled    = true;
-      locateBtn.textContent = 'Getting Location…';
+      locateBtn.textContent = 'Getting Locationâ€¦';
 
       navigator.geolocation.getCurrentPosition(
         function (pos) {
@@ -1811,21 +2162,21 @@
           locateBtn.disabled  = false;
           locateBtn.innerHTML = LOCATE_DEFAULT_HTML;
           const msgs = {
-            1: 'Location permission denied — please type your location.',
-            2: 'Location unavailable — please type your location.',
-            3: 'Location timed out — please type your location.'
+            1: 'Location permission denied â€” please type your location.',
+            2: 'Location unavailable â€” please type your location.',
+            3: 'Location timed out â€” please type your location.'
           };
           // Show error inline instead of alert
           const field = document.getElementById('field-location');
           field.classList.add('has-error');
           field.querySelector('.field-error-msg').textContent =
-            msgs[err.code] || 'Could not get GPS — type your location.';
+            msgs[err.code] || 'Could not get GPS â€” type your location.';
         },
         { enableHighAccuracy: false, maximumAge: 60000, timeout: 10000 }
       );
     });
 
-    // ── Phone number auto-formatter ──────────────────────────────────
+    // â”€â”€ Phone number auto-formatter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const phoneInput = document.getElementById('phone');
     phoneInput.addEventListener('input', function () {
       const digits = this.value.replace(/\D/g, '').slice(0, 10);
@@ -1838,7 +2189,7 @@
       }
     });
 
-    // ── Validation ───────────────────────────────────────────────────
+    // â”€â”€ Validation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     function clearErrors () {
       document.querySelectorAll('.has-error').forEach(el => el.classList.remove('has-error'));
     }
@@ -1857,14 +2208,14 @@
       const nameVal = document.getElementById('trucker-name').value.trim();
       if (!nameVal) flagField('field-name');
 
-      // Phone — require 10 digits
+      // Phone â€” require 10 digits
       const phoneDigs = phoneInput.value.replace(/\D/g, '');
       if (phoneDigs.length < 10) flagField('field-phone', phoneInput);
 
       // Location
       if (!document.getElementById('location').value.trim()) flagField('field-location');
 
-      // Services — at least one checked
+      // Services â€” at least one checked
       const checkedSvcs = form.querySelectorAll('input[name="services"]:checked');
       if (checkedSvcs.length === 0) {
         document.getElementById('field-services').classList.add('has-error');
@@ -1872,7 +2223,7 @@
         valid = false;
       }
 
-      // Urgency — one selected
+      // Urgency â€” one selected
       if (!form.querySelector('input[name="urgency"]:checked')) {
         document.getElementById('field-urgency').classList.add('has-error');
         if (!firstErrorEl) firstErrorEl = document.querySelector('#field-urgency .urg-option label');
@@ -1885,7 +2236,7 @@
       return { valid, firstErrorEl };
     }
 
-    // ── Photo upload ─────────────────────────────────────────────────
+    // â”€â”€ Photo upload â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const photoBtn      = document.getElementById('photo-btn');
     const photoInput    = document.getElementById('photo-input');
     const photoPreviews = document.getElementById('photo-previews');
@@ -1934,7 +2285,7 @@
       item.dataset.index = index;
       item.innerHTML =
         '<img src="' + dataUrl + '" alt="Photo">' +
-        '<button type="button" class="photo-remove-btn" aria-label="Remove photo">✕</button>';
+        '<button type="button" class="photo-remove-btn" aria-label="Remove photo">âœ•</button>';
       item.querySelector('.photo-remove-btn').addEventListener('click', () => {
         const i = parseInt(item.dataset.index);
         photoDataUrls.splice(i, 1);
@@ -1957,12 +2308,12 @@
         photoCountNote.textContent = 'Maximum 4 photos added.';
         photoBtn.style.display = 'none';
       } else {
-        photoCountNote.textContent = photoDataUrls.length + ' photo' + (photoDataUrls.length > 1 ? 's' : '') + ' added — tap to add more.';
+        photoCountNote.textContent = photoDataUrls.length + ' photo' + (photoDataUrls.length > 1 ? 's' : '') + ' added â€” tap to add more.';
         photoBtn.style.display = '';
       }
     }
 
-    // ── Submit ───────────────────────────────────────────────────────
+    // â”€â”€ Submit â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       clearErrors();
@@ -1998,14 +2349,14 @@
       };
 
       submitBtn.disabled   = true;
-      submitBtn.textContent = 'Sending…';
+      submitBtn.textContent = 'Sendingâ€¦';
 
       try {
         await fetch(WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
-          // Limit wait time — don't leave the driver hanging
+          // Limit wait time â€” don't leave the driver hanging
           signal: AbortSignal.timeout ? AbortSignal.timeout(8000) : undefined
         });
       } catch (err) {
@@ -2022,7 +2373,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // ── Service detail panel show/hide ──────────────────────────────
+    // â”€â”€ Service detail panel show/hide â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     function updateDetailPanels () {
       const tireVisible = ['svc-flat', 'svc-repair'].some(id => document.getElementById(id).checked);
       const lightVisible = document.getElementById('svc-lights').checked;
@@ -2034,7 +2385,7 @@
       cb.addEventListener('change', updateDetailPanels);
     });
 
-    // ── Clear individual field errors on edit ────────────────────────
+    // â”€â”€ Clear individual field errors on edit â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     form.addEventListener('input', function (e) {
       const field = e.target.closest('.field');
       if (field) field.classList.remove('has-error');
