@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /n8n-service-request-workflow.json
+Disallow: /n8n-voicemail-transcribe.json
+
+Sitemap: https://royalmiletire.com/sitemap.xml
